@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortuneX Official</title>
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        /* Updated to the deep teal/dark gradient from the image */
+        background: radial-gradient(circle at top right, #1a2e2a, #0a110f); 
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* TOP BAR */
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        /* Changed to the bright light lime/cream from the pricing cards */
+        color: #d8e8d1; 
+    }
+
+    .join-btn {
+        /* Matching the light lime/cream button style */
+        background: #d8e8d1;
+        color: #0a110f;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar a {
+        color: #d8e8d1;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+
+    .navbar a:hover {
+        border-bottom: 3px solid #d8e8d1;
+    }
+
+    /* VIDEO SECTION */
+    .video-box {
+        width: 90%;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(216, 232, 209, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .video-box video {
+        width: 100%;
+        height: 500px; 
+        border-radius: 10px;
+        object-fit: cover; 
+    }
+
+    .video-box .reward-btn {
+        display: inline-block;
+        margin-top: 15px;
+        background: #d8e8d1;
+        color: #0a110f;
+        padding: 10px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .how-it-works-section {
+        width: 90%;
+        margin: 30px auto;
+    }
+
+    .works-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .work-box {
+        /* Using the semi-transparent light background from the image center card */
+        background: rgba(216, 232, 209, 0.15); 
+        border: 1px solid rgba(216, 232, 209, 0.2);
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .work-box p {
+        margin: 10px 0;
+        font-size: 15px;
+        color: white;
+    }
+
+    .join-btn-small {
+        display: inline-block;
+        margin-top: 8px;
+        background: #d8e8d1;
+        color: #0a110f;
+        padding: 8px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+   /* FOOTER */
+    .footer {
+        text-align: center;
+        padding: 20px 0;
+        color: #d8e8d1;
+        font-size: 16px;
+        background: transparent;
+        margin-top: 40px;
+    }
+
+    .footer-line {
+        width: 90%;
+        height: 1px;
+        background: rgba(216, 232, 209, 0.3);
+        margin: 40px auto 0 auto;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+    <div class="logo">FortuneX</div>
+    <a href="reward.html" class="join-btn">Join Now</a>
+</div>
+
+<div class="video-box">
+    <video src="video.mp4" controls></video>
+    <a href="reward.html" class="reward-btn">JOIN US NOW 🔥</a>
+</div>
+
+<div class="how-it-works-section">
+    <h2 style="text-align:center; color: #d8e8d1; margin-top: 30px;">How It Works</h2>
+    <div class="works-grid">
+        <div class="work-box">
+            <img src="hero1.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">AUTOMATED TIME EARNINGS IS HERE! ⏰💰</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                Let's be real — Time is Money, but most people just spend theirs. On FortuneX, you earn from it. Straight up. 🚀<br><br>
+                Spend 15 mins on the site — boom, ₦3,000. 30 mins? ₦6,000. 1 full hour? That’s ₦12,000 in your pocket.
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+
+        <div class="work-box">
+            <img src="hero2.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">💬 Chat the World. Earn Real Money. 🌍💰</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                From Lagos to London, Accra to New York — your keyboard is now your passport.<br><br>
+                Every emoji, every gist, every reply isn't just talk — it's transaction. ⚙️
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+
+        <div class="work-box">
+            <img src="hero3.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">💥 FortuneX + TikTok = Straight Cash Flow 💰</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                Your content shouldn't just trend — it should pay. Every post, every live, every vibe you drop now counts in digits. ⚙️
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+
+        <div class="work-box">
+            <img src="hero4.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">🎧 Turn Up the Volume — It's Payday Season! 💰</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                Your playlist just became your payslip. Every beat you vibe to, every rating you drop — FortuneX turns it into real cash. ⚙️
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+    </div>
+
+    <div style="margin-top:20px; display: flex; flex-direction: column; gap: 20px;">
+        <div class="work-box">
+            <img src="hero5.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">FortuneX is Officially VERIFIED and CERTIFIED by CAC, Nigeria 🇳🇬✅</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                This certification confirms what our community already knew — FortuneX is real, verified, and here to last. 💰
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+
+        <div class="work-box">
+            <img src="hero6.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">🎬 Watch Comedy Videos & Earn on FortuneX ⚙️🔥</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                Enjoy trending skits — every view adds value to your time. 1 comedy video earned you ₦1000💃
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+
+        <div class="work-box">
+            <img src="hero7.jpg" alt="Hero Image" style="width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <p style="font-weight:bold; color:white; font-size:16px; margin-top:10px;">👨🏽‍🍳 Cook. Teach. Get Paid.</p>
+            <p style="font-size:16px; color:white; margin-top:10px; line-height:1.6;">
+                Share your local dishes, teach foreigners how it’s done, and watch your kitchen skills turn into global fame. 🌍🔥
+            </p>
+            <a href="reward.html" class="join-btn-small">Join Now</a>
+        </div>
+    </div>
+</div>
+
+<div class="footer-line"></div>
+
+<div class="footer">
+    &copy;2025 FortuneX — All Rights Reserved
+</div>
+
+</body>
+  </html>
+
