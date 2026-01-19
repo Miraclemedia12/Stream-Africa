@@ -7,8 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background: radial-gradient(circle at center, #1a2e2a 0%, #0a110f 100%);
             font-family: 'Inter', sans-serif;
             color: white;
@@ -19,18 +18,14 @@
         }
 
         .logo {
-            font-size: 32px;
-            font-weight: 900;
-            color: #d8e8d1;
-            text-align: center;
-            margin-top: 20px;
-            letter-spacing: 5px;
+            font-size: 32px; font-weight: 900;
+            color: #d8e8d1; text-align: center;
+            margin-top: 20px; letter-spacing: 5px;
             text-transform: uppercase;
         }
 
         .payment-container {
-            width: 95%;
-            max-width: 450px;
+            width: 95%; max-width: 450px;
             margin: 30px auto;
             background: rgba(216, 232, 209, 0.05);
             border: 1px solid rgba(216, 232, 209, 0.2);
@@ -42,97 +37,88 @@
 
         .timer-box {
             background: rgba(255, 68, 68, 0.1);
-            border: 1px solid #ff4444;
-            color: #ff4444;
-            padding: 10px;
-            border-radius: 10px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        #timer { font-size: 20px; display: block; }
-
-        .instruction {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            border: 1px solid #ff4444; color: #ff4444;
+            padding: 10px; border-radius: 10px;
+            font-weight: 800; margin-bottom: 20px; font-size: 14px;
         }
 
         .bank-card {
-            background: #d8e8d1;
-            color: #0a110f;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: left;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            background: #d8e8d1; color: #0a110f;
+            padding: 20px; border-radius: 15px;
+            text-align: left; margin-bottom: 25px;
         }
 
-        .label { font-size: 11px; text-transform: uppercase; opacity: 0.7; font-weight: 700; margin-bottom: 2px; }
+        .label { font-size: 11px; text-transform: uppercase; opacity: 0.7; font-weight: 700; }
         .data { font-size: 18px; font-weight: 900; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
 
         .copy-btn {
-            background: #0a110f;
-            color: #d8e8d1;
-            font-size: 11px;
-            padding: 5px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: 800;
+            background: #0a110f; color: #d8e8d1;
+            font-size: 11px; padding: 5px 10px;
+            border-radius: 6px; cursor: pointer; font-weight: 800;
         }
-
-        .amount-box {
-            background: rgba(216, 232, 209, 0.1);
-            border: 2px dashed #d8e8d1;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        .amount-text { font-size: 32px; font-weight: 900; color: #d8e8d1; }
 
         .confirm-btn {
-            width: 100%;
-            padding: 20px;
-            background: #d8e8d1;
-            color: #0a110f;
-            border: none;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 900;
-            cursor: pointer;
-            text-transform: uppercase;
+            width: 100%; padding: 20px;
+            background: #d8e8d1; color: #0a110f;
+            border: none; border-radius: 12px;
+            font-size: 17px; font-weight: 900;
+            cursor: pointer; text-transform: uppercase;
             transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
         }
 
-        .confirm-btn:hover { background: white; transform: translateY(-2px); }
+        /* VERIFICATION OVERLAY */
+        #verify-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(10, 17, 15, 0.98);
+            display: none; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-box { width: 80%; max-width: 300px; text-align: center; }
+        
+        .loading-text {
+            color: #d8e8d1; font-weight: 900;
+            letter-spacing: 2px; margin-bottom: 15px;
+            text-transform: uppercase; font-size: 18px;
+        }
+
+        .progress-bar-container {
+            width: 100%; height: 12px;
+            background: rgba(216, 232, 209, 0.1);
+            border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(216, 232, 209, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%; width: 0%;
+            background: #d8e8d1;
+            box-shadow: 0 0 15px #d8e8d1;
+        }
 
         .footer { padding-bottom: 30px; color: #888; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body>
 
+<div id="verify-overlay">
+    <div class="loader-box">
+        <div class="loading-text" id="loader-title">Verifying Transaction...</div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="bar"></div>
+        </div>
+    </div>
+</div>
+
 <div class="logo">STREAM</div>
 
 <div class="payment-container">
     <div class="timer-box">
-        PAYMENT WINDOW EXPIRES IN:
-        <span id="timer">20:00</span>
+        PAYMENT WINDOW EXPIRES: <span id="timer">20:00</span>
     </div>
 
-    <p class="instruction">Transfer <b>₦12,000</b> to the account below. After payment, click the button to send your receipt for instant activation. 🚀</p>
-
-    <div class="amount-box">
-        <div class="label" style="color:#d8e8d1">Total Amount</div>
-        <div class="amount-text">₦12,000</div>
-    </div>
+    <p class="mb-6 text-sm text-gray-400">Transfer <b>₦12,000</b> to the details below, then click verify.</p>
 
     <div class="bank-card">
         <div class="label">Bank Name</div>
@@ -141,79 +127,71 @@
         <div class="label">Account Number</div>
         <div class="data">
             <span id="acc-num">8146992120</span>
-            <span class="copy-btn" onclick="copyText('8146992120')">Copy No</span>
+            <span class="copy-btn" onclick="copyText('8146992120')">Copy</span>
         </div>
 
         <div class="label">Account Name</div>
         <div class="data">Ahamefula Linus</div>
     </div>
 
-    <button class="confirm-btn" id="confirmButton" onclick="handlePaymentAction()">
-        <span>I HAVE MADE PAYMENT</span>
-    </button>
-    
-    <p style="font-size: 11px; margin-top: 15px; color: #888;">Step 2: Send proof to Admin via Telegram.</p>
+    <button class="confirm-btn" onclick="startVerification()">I HAVE MADE PAYMENT</button>
 </div>
 
-<div class="footer">
-    Secure Payment Gateway &copy; STREAM AFRICA 
-</div>
+<div class="footer">Secure Payment Gateway &copy; STREAM AFRICA</div>
 
 <script>
-    // 1. Timer Logic
+    // 1. Timer logic
     function startTimer(duration, display) {
-        let timer = duration, minutes, seconds;
-        const interval = setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            display.textContent = minutes + ":" + seconds;
-            if (--timer < 0) {
-                clearInterval(interval);
-                display.textContent = "EXPIRED";
-            }
+        let timer = duration;
+        setInterval(() => {
+            let mins = Math.floor(timer / 60);
+            let secs = timer % 60;
+            display.textContent = `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            if (--timer < 0) timer = 0;
         }, 1000);
     }
 
-    // 2. Copy Function
+    // 2. Copy logic
     function copyText(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Account Number Copied! Proceed to your bank app.");
-        });
+        navigator.clipboard.writeText(text);
+        alert("Account Number Copied!");
     }
 
-    // 3. Telegram Redirect with Prefilled Message
-    function handlePaymentAction() {
-        const btn = document.getElementById('confirmButton');
-        const originalText = btn.innerHTML;
+    // 3. Game-style Verification logic
+    function startVerification() {
+        const overlay = document.getElementById('verify-overlay');
+        const bar = document.getElementById('bar');
+        const title = document.getElementById('loader-title');
         
-        // Visual Feedback
-        btn.innerHTML = `<span>VERIFYING...</span>`;
-        btn.disabled = true;
-
-        // Message Encoding
-        const message = "Hello, Stream Admin! \n\nI have just made my payment of ₦12,000 for the STREAM AFRICA membership. \n\nI am ready to start streaming and earning. Please verify my payment and activate my account! ✅";
-        const encodedMessage = encodeURIComponent(message);
-        const telegramUrl = `https://t.me/Stream_africa?text=${encodedMessage}`;
-
-        // Delay for professional feel
-        setTimeout(() => {
-            window.location.href = telegramUrl;
+        overlay.style.display = 'flex';
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 5) + 1; // Random speed for game feel
             
-            // Reset button if they come back
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 2000);
-        }, 2500);
+            if (progress >= 100) {
+                progress = 100;
+                bar.style.width = '100%';
+                clearInterval(interval);
+                
+                // Switch to Success
+                title.innerHTML = "Success! ✅";
+                title.style.color = "#4ade80"; 
+                
+                setTimeout(() => {
+                    const msg = "Hello, Stream Admin! 🚀\n\nI have just made my payment of ₦12,000 for the STREAM AFRICA membership. \n\nI am ready to start streaming and earning. Please verify my payment and activate my account! ✅";
+                    window.location.href = `https://t.me/Stream_africa?text=${encodeURIComponent(msg)}`;
+                }, 1500);
+            } else {
+                bar.style.width = progress + '%';
+            }
+        }, 100);
     }
 
-    window.onload = function () {
+    window.onload = () => {
         startTimer(60 * 20, document.querySelector('#timer'));
     };
 </script>
 
 </body>
-  </html>
-
+</html>
