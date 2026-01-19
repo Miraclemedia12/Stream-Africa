@@ -6,7 +6,6 @@
     <title>Register | STREAM AFRICA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Base Colors & Layout */
         body {
             margin: 0;
             padding: 0;
@@ -48,56 +47,38 @@
             transition: all 0.3s;
         }
 
-        .navbar a.active {
-            border-bottom: 3px solid #d8e8d1;
-        }
+        .navbar a.active { border-bottom: 3px solid #d8e8d1; }
 
         .register-container {
             width: 95%;
             max-width: 450px;
-            margin: 30px auto;
+            margin: 40px auto;
             background: rgba(216, 232, 209, 0.05);
             border: 1px solid rgba(216, 232, 209, 0.2);
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 35px 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            flex-grow: 1;
         }
 
         .main-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             color: white;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
-        .plan-selection {
-            font-size: 16px;
-            color: #ccc;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .plan-name {
-            font-size: 18px;
-            font-weight: 900;
-            color: #d8e8d1;
-            display: block;
-            margin-top: 5px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 22px; }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #d8e8d1;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .form-group input {
@@ -120,7 +101,7 @@
         
         .payment-button {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: #d8e8d1;
             color: #0a110f;
             border: none;
@@ -130,16 +111,11 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(216, 232, 209, 0.2);
             transition: 0.3s;
-            margin-top: 10px;
+            margin-top: 15px;
             text-transform: uppercase;
         }
 
-        .payment-button:hover {
-            background: white;
-            transform: translateY(-2px);
-        }
-
-        /* LIVE ACTIVITY POPUP (STREAM THEME) */
+        /* LIVE ACTIVITY POPUP */
         .activity-feed-container {
             position: fixed; 
             bottom: -100px; 
@@ -159,23 +135,15 @@
         }
 
         .show-activity { bottom: 25px; }
-
         .activity-icon { margin-right: 12px; flex-shrink: 0; }
-
-        #activity-text {
-            flex-grow: 1;
-            font-size: 13px;
-            line-height: 1.5;
-            color: white;
-        }
-
+        #activity-text { flex-grow: 1; font-size: 13px; line-height: 1.5; color: white; text-align: left;}
         .stream-brand { color: #d8e8d1; font-weight: 900; text-transform: uppercase; }
         .activity-user { color: #d8e8d1; font-weight: 700; }
         .activity-amount { color: #d8e8d1; font-weight: 900; }
         .activity-amount.withdrawal { color: #ff4444; }
         .activity-time { color: #888; font-size: 11px; display: block; margin-top: 3px; }
 
-        .footer { flex-shrink: 0; width: 100%; text-align: center; padding: 25px 0; color: #888; font-size: 13px; }
+        .footer { width: 100%; text-align: center; padding: 30px 0; color: #888; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -189,9 +157,6 @@
 
 <div class="register-container">
     <div class="main-title">Create Account</div>
-    
-        <span id="selected-plan-display" class="plan-name">Onboarding (₦12,000)</span>
-    </div>
 
     <form id="registration-form">
         <div class="form-group">
@@ -235,13 +200,17 @@
 </div>
 
 <script>
-    // POPUP NOTIFICATION DATA
     const ACTIVITIES = [
         { name: "Adesua M.", type: "withdrawn", amount: "35,000", location: "Lagos", time: "just now" },
         { name: "Obinna K.", type: "joined", amount: "12,000", location: "Port Harcourt", time: "2 minutes ago" },
         { name: "Fatima S.", type: "joined", amount: "12,000", location: "Kano", time: "5 minutes ago" },
         { name: "Chidi N.", type: "withdrawn", amount: "15,500", location: "Enugu", time: "10 minutes ago" },
-        { name: "Tunde W.", type: "joined", amount: "12,000", location: "Ibadan", time: "1 minute ago" }
+        { name: "Tunde W.", type: "joined", amount: "12,000", location: "Ibadan", time: "1 minute ago" },
+        { name: "Zainab A.", type: "withdrawn", amount: "52,000", location: "Abuja", time: "just now" },
+        { name: "Efe J.", type: "joined", amount: "12,000", location: "Warri", time: "4 minutes ago" },
+        { name: "Ngozi V.", type: "withdrawn", amount: "22,400", location: "Owerri", time: "8 minutes ago" },
+        { name: "Mustapha B.", type: "joined", amount: "12,000", location: "Kaduna", time: "3 minutes ago" },
+        { name: "Amaka R.", type: "withdrawn", amount: "110,000", location: "Onitsha", time: "just now" }
     ];
 
     let activityIndex = 0;
@@ -252,8 +221,7 @@
         const activitySvg = document.getElementById('activity-svg');
         const act = ACTIVITIES[activityIndex];
         
-        let messageHtml;
-        let svgIcon;
+        let messageHtml, svgIcon;
 
         if (act.type === 'joined') {
             messageHtml = `<span class="activity-user">${act.name}</span> from ${act.location} has joined <span class="stream-brand">STREAM AFRICA</span> and earned <span class="activity-amount">₦${act.amount}</span> cashback!`;
@@ -273,24 +241,15 @@
         }, 7000); 
     }
 
-    // Initialize Plan Display
     document.addEventListener('DOMContentLoaded', () => {
-        const planDisplay = document.getElementById('selected-plan-display');
-        const selectedPlan = localStorage.getItem('selectedPlan');
-        if (selectedPlan) { planDisplay.textContent = selectedPlan; }
-        
-        // Start Activity Feed
         setTimeout(cycleActivityFeed, 2000);
         setInterval(cycleActivityFeed, 12000);
 
-        // Handle Form Redirect
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             window.location.href = 'payment.html';
         });
     });
 </script>
-
 </body>
 </html>
-
