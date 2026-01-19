@@ -44,6 +44,15 @@
 
         #timer { font-size: 20px; display: block; }
 
+        /* IMAGE STYLE INSTRUCTION */
+        .instruction {
+            font-size: 15px;
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
         .amount-box {
             background: rgba(216, 232, 209, 0.1);
             border: 2px dashed #d8e8d1;
@@ -78,7 +87,7 @@
             transition: 0.3s;
         }
 
-        /* VERIFICATION OVERLAY (GAME FEEL) */
+        /* VERIFICATION OVERLAY */
         #verify-overlay {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -89,26 +98,9 @@
         }
 
         .loader-box { width: 80%; max-width: 320px; text-align: center; }
-        
-        .loading-text {
-            color: #d8e8d1; font-weight: 900;
-            letter-spacing: 2px; margin-bottom: 20px;
-            text-transform: uppercase; font-size: 20px;
-        }
-
-        .progress-bar-container {
-            width: 100%; height: 14px;
-            background: rgba(216, 232, 209, 0.1);
-            border-radius: 20px; overflow: hidden;
-            border: 1px solid rgba(216, 232, 209, 0.3);
-        }
-
-        .progress-fill {
-            height: 100%; width: 0%;
-            background: #d8e8d1;
-            box-shadow: 0 0 20px rgba(216, 232, 209, 0.5);
-            transition: width 0.2s ease;
-        }
+        .loading-text { color: #d8e8d1; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; font-size: 20px; }
+        .progress-bar-container { width: 100%; height: 14px; background: rgba(216, 232, 209, 0.1); border-radius: 20px; overflow: hidden; border: 1px solid rgba(216, 232, 209, 0.3); }
+        .progress-fill { height: 100%; width: 0%; background: #d8e8d1; box-shadow: 0 0 20px rgba(216, 232, 209, 0.5); transition: width 0.2s ease; }
 
         .footer { padding: 30px; color: #888; font-size: 12px; text-align: center; }
     </style>
@@ -132,6 +124,8 @@
         <span id="timer">20:00</span>
     </div>
 
+    <p class="instruction">Transfer <b>₦12,000</b> to the account below. After payment, click the button to send your receipt for instant activation. 🚀</p>
+
     <div class="amount-box">
         <div class="label" style="color:#d8e8d1; margin-bottom: 5px;">Amount to Pay</div>
         <div class="amount-text">₦12,000</div>
@@ -152,13 +146,11 @@
     </div>
 
     <button class="confirm-btn" onclick="runVerification()">I HAVE MADE PAYMENT</button>
-    <p style="font-size: 11px; margin-top: 15px; color: #888;">Step 2: Authenticate and send proof to Admin DM.</p>
 </div>
 
-<div class="footer">Secure Gateway &copy; STREAM AFRICA ✅</div>
+<div class="footer">Secure Gateway &copy; STREAM AFRICA </div>
 
 <script>
-    // 1. 20 Minute Timer
     function startTimer(duration, display) {
         let timer = duration;
         setInterval(() => {
@@ -169,46 +161,32 @@
         }, 1000);
     }
 
-    // 2. Copy Function
     function copyText(text) {
         navigator.clipboard.writeText(text).then(() => {
             alert("Account Number Copied!");
         });
     }
 
-    // 3. Verification Sequence
     function runVerification() {
         const overlay = document.getElementById('verify-overlay');
         const bar = document.getElementById('bar');
         const title = document.getElementById('loader-title');
-        
         overlay.style.display = 'flex';
-        
         let progress = 0;
         const interval = setInterval(() => {
             progress += Math.floor(Math.random() * 8) + 2;
-            
             if (progress >= 100) {
-                progress = 100;
-                bar.style.width = '100%';
-                clearInterval(interval);
-                
+                progress = 100; bar.style.width = '100%'; clearInterval(interval);
                 title.innerHTML = "Success! ✅";
-                title.style.color = "#d8e8d1"; 
-                
                 setTimeout(() => {
                     const message = "Hello, Stream Admin! 🚀\n\nI have just made my payment of ₦12,000 for the STREAM AFRICA membership. \n\nI am ready to start streaming and earning. Please verify my payment and activate my account! ✅";
                     window.location.href = `https://t.me/Stream_africa?text=${encodeURIComponent(message)}`;
                 }, 1500);
-            } else {
-                bar.style.width = progress + '%';
-            }
+            } else { bar.style.width = progress + '%'; }
         }, 150);
     }
 
-    window.onload = () => {
-        startTimer(60 * 20, document.querySelector('#timer'));
-    };
+    window.onload = () => { startTimer(60 * 20, document.querySelector('#timer')); };
 </script>
 
 </body>
