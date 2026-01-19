@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | STREAM AFRICA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1a2e2a 0%, #0a110f 100%);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #d8e8d1;
+            text-align: center;
+            margin-top: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .payment-container {
+            width: 95%;
+            max-width: 450px;
+            margin: 30px auto;
+            background: rgba(216, 232, 209, 0.05);
+            border: 1px solid rgba(216, 232, 209, 0.2);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .timer-box {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        #timer { font-size: 20px; display: block; }
+
+        .instruction {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .bank-card {
+            background: #d8e8d1;
+            color: #0a110f;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .label { font-size: 11px; text-transform: uppercase; opacity: 0.7; font-weight: 700; margin-bottom: 2px; }
+        .data { font-size: 18px; font-weight: 900; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+
+        .copy-btn {
+            background: #0a110f;
+            color: #d8e8d1;
+            font-size: 11px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .amount-box {
+            background: rgba(216, 232, 209, 0.1);
+            border: 2px dashed #d8e8d1;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .amount-text { font-size: 32px; font-weight: 900; color: #d8e8d1; }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 20px;
+            background: #d8e8d1;
+            color: #0a110f;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .confirm-btn:hover { background: white; transform: translateY(-2px); }
+
+        .footer { padding-bottom: 30px; color: #888; font-size: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="logo">STREAM</div>
+
+<div class="payment-container">
+    <div class="timer-box">
+        PAYMENT WINDOW EXPIRES IN:
+        <span id="timer">20:00</span>
+    </div>
+
+    <p class="instruction">Transfer <b>₦12,000</b> to the account below. After payment, click the button to send your receipt for instant activation. 🚀</p>
+
+    <div class="amount-box">
+        <div class="label" style="color:#d8e8d1">Total Amount</div>
+        <div class="amount-text">₦12,000</div>
+    </div>
+
+    <div class="bank-card">
+        <div class="label">Bank Name</div>
+        <div class="data">Moniepoint MFB</div>
+
+        <div class="label">Account Number</div>
+        <div class="data">
+            <span id="acc-num">8146992120</span>
+            <span class="copy-btn" onclick="copyText('8146992120')">Copy No</span>
+        </div>
+
+        <div class="label">Account Name</div>
+        <div class="data">Ahamefula Linus</div>
+    </div>
+
+    <button class="confirm-btn" id="confirmButton" onclick="handlePaymentAction()">
+        <span>I HAVE MADE PAYMENT</span>
+    </button>
+    
+    <p style="font-size: 11px; margin-top: 15px; color: #888;">Step 2: Send proof to Admin via Telegram.</p>
+</div>
+
+<div class="footer">
+    Secure Payment Gateway &copy; STREAM AFRICA 
+</div>
+
+<script>
+    // 1. Timer Logic
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        const interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if (--timer < 0) {
+                clearInterval(interval);
+                display.textContent = "EXPIRED";
+            }
+        }, 1000);
+    }
+
+    // 2. Copy Function
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Account Number Copied! Proceed to your bank app.");
+        });
+    }
+
+    // 3. Telegram Redirect with Prefilled Message
+    function handlePaymentAction() {
+        const btn = document.getElementById('confirmButton');
+        const originalText = btn.innerHTML;
+        
+        // Visual Feedback
+        btn.innerHTML = `<span>VERIFYING...</span>`;
+        btn.disabled = true;
+
+        // Message Encoding
+        const message = "Hello, Stream Admin! \n\nI have just made my payment of ₦12,000 for the STREAM AFRICA membership. \n\nI am ready to start streaming and earning. Please verify my payment and activate my account! ✅";
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/Stream_africa?text=${encodedMessage}`;
+
+        // Delay for professional feel
+        setTimeout(() => {
+            window.location.href = telegramUrl;
+            
+            // Reset button if they come back
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }, 2500);
+    }
+
+    window.onload = function () {
+        startTimer(60 * 20, document.querySelector('#timer'));
+    };
+</script>
+
+</body>
+  </html>
+
