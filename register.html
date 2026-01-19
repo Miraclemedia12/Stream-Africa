@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | STREAM AFRICA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base Colors & Layout */
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1a2e2a 0%, #0a110f 100%);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #d8e8d1;
+            text-align: center;
+            margin-top: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(216, 232, 209, 0.1);
+            width: 100%;
+        }
+
+        .navbar a {
+            color: #d8e8d1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 6px 10px;
+            transition: all 0.3s;
+        }
+
+        .navbar a.active {
+            border-bottom: 3px solid #d8e8d1;
+        }
+
+        .register-container {
+            width: 95%;
+            max-width: 450px;
+            margin: 30px auto;
+            background: rgba(216, 232, 209, 0.05);
+            border: 1px solid rgba(216, 232, 209, 0.2);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex-grow: 1;
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .plan-selection {
+            font-size: 16px;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 900;
+            color: #d8e8d1;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #d8e8d1;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(216, 232, 209, 0.2);
+            border-radius: 12px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #d8e8d1;
+            background-color: rgba(216, 232, 209, 0.1);
+        }
+        
+        .payment-button {
+            width: 100%;
+            padding: 18px;
+            background: #d8e8d1;
+            color: #0a110f;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 232, 209, 0.2);
+            transition: 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .payment-button:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* LIVE ACTIVITY POPUP (STREAM THEME) */
+        .activity-feed-container {
+            position: fixed; 
+            bottom: -100px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; 
+            width: 90%;
+            max-width: 400px;
+            padding: 15px;
+            background: #0a110f; 
+            border: 1px solid #d8e8d1; 
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+
+        .show-activity { bottom: 25px; }
+
+        .activity-icon { margin-right: 12px; flex-shrink: 0; }
+
+        #activity-text {
+            flex-grow: 1;
+            font-size: 13px;
+            line-height: 1.5;
+            color: white;
+        }
+
+        .stream-brand { color: #d8e8d1; font-weight: 900; text-transform: uppercase; }
+        .activity-user { color: #d8e8d1; font-weight: 700; }
+        .activity-amount { color: #d8e8d1; font-weight: 900; }
+        .activity-amount.withdrawal { color: #ff4444; }
+        .activity-time { color: #888; font-size: 11px; display: block; margin-top: 3px; }
+
+        .footer { flex-shrink: 0; width: 100%; text-align: center; padding: 25px 0; color: #888; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<div class="logo">STREAM</div>
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="reward.html">Rewards</a>
+    <a href="register.html" class="active">Register</a>
+</div>
+
+<div class="register-container">
+    <div class="main-title">Create Account</div>
+    
+    <div class="plan-selection">
+        Selected Membership:
+        <span id="selected-plan-display" class="plan-name">Onboarding (₦12,000)</span>
+    </div>
+
+    <form id="registration-form">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="full-name" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Choose unique username" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="active@email.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone-number" placeholder="090........" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Min 8 characters" required>
+        </div>
+
+        <button type="submit" class="payment-button">Register & Make Payment</button>
+    </form>
+</div>
+
+<div class="footer">
+    &copy; 2025 STREAM AFRICA. All rights reserved. ✅
+</div>
+
+<div id="activity-feed" class="activity-feed-container">
+    <div class="activity-icon">
+        <svg id="activity-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d8e8d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </div>
+    <div id="activity-text">Connecting to Stream Africa...</div>
+</div>
+
+<script>
+    // POPUP NOTIFICATION DATA
+    const ACTIVITIES = [
+        { name: "Adesua M.", type: "withdrawn", amount: "35,000", location: "Lagos", time: "just now" },
+        { name: "Obinna K.", type: "joined", amount: "12,000", location: "Port Harcourt", time: "2 minutes ago" },
+        { name: "Fatima S.", type: "joined", amount: "12,000", location: "Kano", time: "5 minutes ago" },
+        { name: "Chidi N.", type: "withdrawn", amount: "15,500", location: "Enugu", time: "10 minutes ago" },
+        { name: "Tunde W.", type: "joined", amount: "12,000", location: "Ibadan", time: "1 minute ago" }
+    ];
+
+    let activityIndex = 0;
+
+    function cycleActivityFeed() {
+        const activityElement = document.getElementById('activity-text');
+        const feedContainer = document.getElementById('activity-feed');
+        const activitySvg = document.getElementById('activity-svg');
+        const act = ACTIVITIES[activityIndex];
+        
+        let messageHtml;
+        let svgIcon;
+
+        if (act.type === 'joined') {
+            messageHtml = `<span class="activity-user">${act.name}</span> from ${act.location} has joined <span class="stream-brand">STREAM AFRICA</span> and earned <span class="activity-amount">₦${act.amount}</span> cashback!`;
+            svgIcon = `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>`;
+        } else {
+            messageHtml = `<span class="activity-user">${act.name}</span> from ${act.location} successfully withdrew <span class="activity-amount withdrawal">₦${act.amount}</span> from <span class="stream-brand">STREAM AFRICA</span>!`;
+            svgIcon = `<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`;
+        }
+
+        activityElement.innerHTML = `${messageHtml}<span class="activity-time">${act.time}</span>`;
+        activitySvg.innerHTML = svgIcon;
+        feedContainer.classList.add('show-activity');
+        
+        setTimeout(() => {
+            feedContainer.classList.remove('show-activity');
+            activityIndex = (activityIndex + 1) % ACTIVITIES.length;
+        }, 7000); 
+    }
+
+    // Initialize Plan Display
+    document.addEventListener('DOMContentLoaded', () => {
+        const planDisplay = document.getElementById('selected-plan-display');
+        const selectedPlan = localStorage.getItem('selectedPlan');
+        if (selectedPlan) { planDisplay.textContent = selectedPlan; }
+        
+        // Start Activity Feed
+        setTimeout(cycleActivityFeed, 2000);
+        setInterval(cycleActivityFeed, 12000);
+
+        // Handle Form Redirect
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            window.location.href = 'payment.html';
+        });
+    });
+</script>
+
+</body>
+</html>
+
